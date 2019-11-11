@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
   def index
     if params[:search].present?
       @search = params[:search]
-      @movies = Movie.where('lower(search) = ?', actor.downcase).all
+      @movies = Movie.where('lower(actor) LIKE (?)', "%#{@search.downcase}%").all
     else
       @movies = Movie.all
     end
